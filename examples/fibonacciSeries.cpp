@@ -1,6 +1,6 @@
 /*==========================================================
  * Primer for Matlab's MexFunction for C++
- * simple examplea to run C++ functions in Matlab
+ * simple example to call C++ functions in mexFunction
  *
  * To compile the code:
  *                     mex fibonacciSeries.cpp
@@ -10,11 +10,10 @@
  * Outputs:
  *         fibS = [1 1 2 3 5 8 ... nth fibonacci number]
  *
- * Date: May 8, 2017: Ajit 
+ * Date: May 8, 2017: Ajit Desai
  *========================================================*/
 
 # include "mex.h" 
-# include <iostream>
 # include <math.h>
     
 // C++ function to calculate Fibonacci series  

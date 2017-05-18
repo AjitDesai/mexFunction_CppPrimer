@@ -1,6 +1,6 @@
 /*==========================================================
  * Primer for Matlab's MexFunction for C++
- * simple examplea to run C++ functions in Matlab
+ * simple example to call C++ class in mexFunction
  *
  * To compile the code:
  *                     mex basicMath_classCall.cpp
@@ -11,11 +11,10 @@
  *       add = a+b
  *       multy = a*b
  *
- * Date: May 8, 2017: Ajit 
+ * Date: May 8, 2017: Ajit Desai
  *========================================================*/
 
 # include "mex.h" 
-# include <iostream>
 # include <math.h>
 
 
