@@ -1,31 +1,44 @@
 /*==========================================================
- * hello.cpp - simple example to run c++ functions in matlab
+ * hello.cpp - simplest example to use MexFunction with C++
  *
  * To compile the code:
  *                     mex helloWorld.cpp
  * To run the code: 
- *                 helloWorld
+ *                 helloWorld('yourName')  
  * Output:
- *       C++ hello world!
+ *       Hello yourName from mexFunction's C++ world!
  *
- * Date: May 8, 2017: Ajit 
+ * Date: May 8, 2017: Ajit Desai
  *========================================================*/
 
 # include "mex.h" 
-//# include <iostream>
 
+// // Basic MexFunction Arguments :: lhs = functions(rhs)
+// nlhs : Number of expected outputs
+// plhs : Array of pointers to the output mxArrays
+// nrhs : Number of expected inputs
+// prhs : Array of pointers to the input mxArrays
 
 // MAIN FUNCTION : standard format of mexFunction to call c++ functions
-void mexFunction ( int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[] )
+void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 {
     
-// // Hello World
-	mexPrintf ( "C++ hello world!\n" );
-	
-// // C++ Standard Librara	:: uncomment "iostream"
-// std::cout << ( "C++ hello world!\n" );
-	
-    return;
+// Parameter Definitions
+   char *input, *output;
+    
+// To check if one input argument is provided
+   if (nrhs != 1) { mexErrMsgIdAndTxt("MexPrimer:rhs",
+            "This function requires 1 input sting"); }
+    
+// Process Matlab input in C++ and send back  
+   input = mxArrayToString(prhs[0]);
+    
+// Hello World
+   mexPrintf ("Hello ");
+   mexPrintf (input);
+   mexPrintf (" from mexFunction's C++ world!\n" );  
+   
 }
+
 
 
