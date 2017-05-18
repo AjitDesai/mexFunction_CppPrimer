@@ -23,3 +23,9 @@ Calls a simple C++ function which takes in index and returns fibonacci Series up
 * transactionSorting.cpp \
 Read transacations (numbers) from a pre-loaded text file using "mexCallMATLAB" which call user-defined Matlab funtion "readInput.m".
 Calls a simple C++ function to sort these numbers into <1 million and >1 million. 
+
+* cellProcessing.cpp \
+Read data from input as Matlab-cell and manupulates.
+
+* cellArrayProcessing.cpp \
+Read inputs form Matlab-cell containing array of elements and manupulates. 
