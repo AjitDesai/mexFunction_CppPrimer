@@ -5,26 +5,21 @@
  * To compile the code:
  *                     mex transactionSorting.cpp
  * To run the code: 
- *                [JumboQ NormalQ] = transactionSorting
- *
+ *                [date, doubleAmt, halfAmt] = transactionPrinting(date,amount)
  * Outputs:
+ *        prints: date, amount*2, amount/2
  *
- *
- * Date: May 8, 2017: Ajit 
+ * Date: May 19, 2017: Ajit Desai
  *
  * Steps for preprocessing:
  * [date amount] = readInputTD;
- * for i = 1:4; mycell{i,1} = i.*amount; end;
- * [double, half, sumOfall] = transactionPrinting(amount,mycell)
  *========================================================*/
 
 # include "mex.h" 
-# include "string.h"
-# include "matrix.h"
-# include <stdio.h>
+# include <string>
 
 
-// // C++ function to sort trasaction in <1mil and >1mil
+// // C++ function to manipulate input transaction amounts 
 void sortTrans(double *output1, double *output2, int input1, double *input2) {
     for(int i=0; i<input1; i++) {
             output1[i] = 2*input2[i];
@@ -32,23 +27,16 @@ void sortTrans(double *output1, double *output2, int input1, double *input2) {
     }
 }
 
-void summation(int index, double *output3, int input3, double *input4) {
-    for (int j=0; j<input3; j++) {
-        output3[index] += input4[j];
-    }
-}
-
 
 // MAIN FUNCTION : standard format of mexFunction to call c++ functions
 void mexFunction ( int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[] )
 { 
-    int input1, input3;
-    double *input2, *input4;
+    int input1;
+    double *input2;
     double *output1, *output2;
-    double *output3;
     
-    int input_cell_len, index;
-    mxArray *cell_element_ptr;
+    const char *cstr; 
+    const mxArray *cell_element_ptr;
             
     if (nlhs != 3) { mexErrMsgIdAndTxt("MexPrimer:lhs",
     "This function need 2 output arrays"); }
@@ -57,42 +45,41 @@ void mexFunction ( int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[] )
     "This function need 2 input arrays"); }
     
     // Pointers to input arguments
-    input1 = mxGetM(prhs[0]);
-    input2 = mxGetPr(prhs[0]);    
+    input1 = mxGetM(prhs[1]);
+    input2 = mxGetPr(prhs[1]);    
     
     // Initialize the Output        
-    plhs[0] = mxCreateDoubleMatrix(input1, 1, mxREAL);
     plhs[1] = mxCreateDoubleMatrix(input1, 1, mxREAL);
-    
+    plhs[2] = mxCreateDoubleMatrix(input1, 1, mxREAL);
     
     // Pointers to the output arguments
-    output1 = mxGetPr(plhs[0]);
-    output2 = mxGetPr(plhs[1]);
+    output1 = mxGetPr(plhs[1]);
+    output2 = mxGetPr(plhs[2]);
     
     // sorting of transactions upto nth:input
     sortTrans(output1, output2, input1, input2);
     
-    // Initialize the output2
-    input_cell_len = mxGetNumberOfElements(prhs[1]);
-    // plhs[2] = mxCreateCellMatrix(input_cell_len, 1);
-    plhs[2] = mxCreateDoubleMatrix(input_cell_len, 1, mxREAL);
-    output3 = mxGetPr(plhs[2]);
-    //mexPrintf("total num of cells = %d\n", input_cell_len);
+    // Get the number of elements in the cell 
+    int input_cell_len = mxGetNumberOfElements(prhs[0]);
     
-    for (index=0; index<input_cell_len; index++) 
-    {
-        cell_element_ptr = mxGetCell(prhs[1], index);
-        input4 = mxGetPr(cell_element_ptr);
-        input3 = mxGetM(cell_element_ptr);
-        summation(index, output3, input3, input4);
-        // mxSetCell(plhs[2], index, cell_element_ptr); // Memory issues 
+    // initialize the cell matrix to read and store inputs
+    mxArray *mxarr = mxCreateCellMatrix(input_cell_len, 1);
+    
+    // Process one cell element at a time 
+    for (mwIndex i=0; i<input_cell_len; i++) {
+        cell_element_ptr = mxGetCell(prhs[0],i);
+        cstr = mxArrayToString(cell_element_ptr);
+        mxSetCell(mxarr, i, mxCreateString(cstr));
     }
-
+ 
+    // Insert processed array of string to output
+    plhs[0] = mxarr;
+    
 }
 
 
-
-
+///////////////////////////////////////////////////////////////////////////
+////////// MULTIPLE TRIES ////////////
 // // // C++ function to sort trasaction in <1mil and >1mil
 // void procTrans(double *output1, int lenInput1, double *input1) {
 //     for(int i=0; i<lenInput1; i++) {
@@ -164,7 +151,20 @@ void mexFunction ( int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[] )
 //     status = mxGetString(cell_element_ptr,input2,buflen);
 //     mexPrintf("The length of cell element %d is: %d \n", i, strlen(input2));
 //     mxFree(input2);
-//     }       
+//     }         // Process and print the input cell 
+//     // input_cell_len = mxGetNumberOfElements(prhs[0]);
+//     // printf("number of elements %d\n", input_cell_len);
+//     // for (index=0; index<input_cell_len; index++) {
+//         buflen = (mxGetN(prhs[0]));
+//         printf("number of charecter %d\n", buflen);
+//         output = mxCalloc(buflen, sizeof(char));
+// //         cell_element_ptr = mxGetCell(prhs[0],index);
+// //         output = mxArrayToString(prhs[0]);
+// //         printf("The content at %d is\n",index);
+// //         mexPrintf(output);
+// //    }
+// //    mxFree(output);
+//           
         
         */
         
