@@ -30,8 +30,8 @@ Read data from input as Matlab-cell and manupulates.
 * cellArrayProcessing.cpp \
 Read inputs form Matlab-cell containing array of elements and manupulates. 
 
-* cell_stingProcessing.cpp \ 
+* cell_stringProcessing.cpp \ 
 Read inputs from Matlab-cell containing strings and manupulates.
 
-* transacationPrinting.cpp \
+* transactionPrinting.cpp \
 Read inputs in the form of numbers and cell of strings and and manupulates. 
