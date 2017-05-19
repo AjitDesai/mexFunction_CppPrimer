@@ -11,11 +11,10 @@
  *         > 1 million => Jumbo Que
  *         < 1 million => Normal Que
  *
- * Date: May 8, 2017: Ajit 
+ * Date: May 8, 2017: Ajit Desai
  *========================================================*/
 
 # include "mex.h" 
-# include <iostream>
 # include <math.h>
     
 // // C++ function to sort trasaction in <1mil and >1mil
