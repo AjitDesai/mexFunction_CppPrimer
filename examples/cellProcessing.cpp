@@ -5,10 +5,9 @@
  * To compile the code:
  *                     mex cellProcessing.cpp
  * To run the code: 
- *                cellProcessing(array,cell_array)
- *
+ *                cellProcessing(mycell)
  * Outputs:
- *        index & arrayElement
+ *        index & cell_element
  *
  * Date: May 8, 2017: Ajit 
  *

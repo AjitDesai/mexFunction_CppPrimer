@@ -5,7 +5,7 @@
  * To compile the code:
  *                     mex transactionSorting.cpp
  * To run the code: 
- *                [date, doubleAmt, halfAmt] = transactionPrinting(date,amount)
+ *            [date, doubleAmt, halfAmt] = transactionPrinting(date,amount)
  * Outputs:
  *        prints: date, amount*2, amount/2
  *
