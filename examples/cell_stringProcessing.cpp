@@ -5,14 +5,15 @@
  * To compile the code:
  *                     mex cell_stringProcessing.cpp
  * To run the code: 
- *                cell_stringProcessing(date)
+ *                cell_stringProcessing(cellOfStrings)
  * Outputs:
- *        input stings
+ *        array
  *
  * Date: May 19, 2017: Ajit Desai
  *
  * Steps for input data::
- * [date] = readInputS()
+ * myStringCell = readInputS;
+ * cell_stringProcessing(myStringCell)
  *========================================================*/
 
 # include "mex.h" 
@@ -28,7 +29,7 @@ void mexFunction ( int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[] )
 
     // number of input/output arguments variafication
     if (nrhs != 1) { mexErrMsgIdAndTxt("MexPrimer:lhs",
-            "This function need 1 input arrays"); }
+            "This function need 1 input array"); }
     
     // Get the number of elements in the cell 
     int input_cell_len = mxGetNumberOfElements(prhs[0]);
@@ -43,7 +44,7 @@ void mexFunction ( int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[] )
         mxSetCell(mxarr, i, mxCreateString(cstr));
     }
     
-    // Insert processed inputs array of string to output 
+    // Insert processed inputs (array of strings) to output 
     plhs[0] = mxarr;
 
 }

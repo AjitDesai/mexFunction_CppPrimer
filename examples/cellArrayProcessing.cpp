@@ -5,16 +5,15 @@
  * To compile the code:
  *                     mex cellArrayProcessing.cpp
  * To run the code: 
- *                [double, half, sumOfall] = cellArrayProcessing(array,cell_array)
- *
+ *         [double, half, sumOfall] = cellArrayProcessing(my_array,cell_array)
  * Outputs:
- *
+ *        2*my_array, 0.5*my_array, sumOfCellElements 
  *
  * Date: May 8, 2017: Ajit 
  *
  * Steps for input data::
- * [array] = [1000, 2000, 3000, 4000];
- * for i = 1:4; cell_array{i,1} = i.*amount; end;
+ * my_array = [1000; 2000; 3000; 4000];
+ * for i = 1:4; cell_array{i,1} = i.*my_array; end;
  *========================================================*/
 
 # include "mex.h" 
@@ -53,7 +52,7 @@ void mexFunction ( int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[] )
     
     // number of input/output arguments variafication 
     if (nlhs != 3) { mexErrMsgIdAndTxt("MexPrimer:lhs",
-            "This function need 2 output arrays"); }
+            "This function need 3 output arrays"); }
     
     if (nrhs != 2) { mexErrMsgIdAndTxt("MexPrimer:lhs",
             "This function need 2 input arrays"); }
